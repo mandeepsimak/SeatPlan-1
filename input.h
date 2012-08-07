@@ -17,8 +17,9 @@ protected:
 	int rows[min_size], cols[min_size], t_rooms;
 
 	// Roll Number variables
-	int t_branches;//, start_roll[min_size], end_roll[min_size];
-	string branch_name[min_size], rollno[min_size];
+	int t_branches, roll_no[min_size];//, start_roll[min_size], end_roll[min_size];
+	string branch_name[min_size], rollno[min_size];//, input_file;
+	char input_file[15];
 	
 	// File variable
 	ifstream infile;
@@ -33,4 +34,5 @@ public:
 	void expand(string);
 	template<typename OutIter>
 	bool parse_number_list_with_ranges(istream& is, OutIter out);
+	void roll_no_sort();
 };

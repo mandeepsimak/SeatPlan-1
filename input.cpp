@@ -21,18 +21,18 @@ void input :: rollno_details()	// get roll no details
 
 void input ::  input_in_details()	// read input(input.in) file
 {
-	//cout<<"\n\t Enter input file name: ";
-	//cin>>input_file;
+	cout<<"\n\t Enter input file name: ";
+	cin>>input_file;
 	//input_file = "input.in";
-	infile.open("input.in");//, ios::in, ios::out);
+	infile.open(input_file);//"input.in");//, ios::in, ios::out);
 	room_details();
 	rollno_details();
 	infile.close();
 }
 
 void input :: expand(string rno)	// process input.in file and 
-{								// generate input.out file
-	//file.open("input.out", ios::out, ios::in);
+{								// generate input_sort.out file
+	//outfile.open("input_unsort.out", ios::app);//, ios::out, ios::in);
 	
 	istringstream rollNo(rno);
 	deque<int> v;
@@ -44,9 +44,18 @@ void input :: expand(string rno)	// process input.in file and
 	}
 	else
 	outfile << "an error occured.\n";
-	//file.close();
+	//outfile.close();
 }
 
+void input :: roll_no_sort()
+{
+	outfile.open("input_unsort.out");
+	for(int i=0; i<t_branches; i++)
+	{
+		expand(rollno[i]);
+	}
+	outfile.close();
+}
 
 void input :: input_out_file()
 {
@@ -61,7 +70,7 @@ void input :: input_out_file()
 	{
 		outfile<<branch_name[i]<<" ";
 		//string ss = itoa (rollno[i]);
-		expand(rollno[i]);
+		//expand(rollno[i]);
 	}
 	outfile.close();
 }
