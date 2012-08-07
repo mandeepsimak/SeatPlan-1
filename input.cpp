@@ -49,15 +49,17 @@ void input :: expand(string rno)	// process input.in file and
 	
 }
 
-void input :: roll_no_sort()
+void input :: roll_no_sort()	// Expanding and sorting of roll nos
 {
-	outfile.open("input_unsort.out");//, ios::in, ios::out);
+	// Writing expanded form of roll nos in file
+	outfile.open("input_unsort.out");
 	for(int i=0; i<t_branches; i++)
 	{
 		expand(rollno[i]);
 	}
 	outfile.close();
 	
+	// Reading roll nos from file & storing in sort[][] array
 	infile.open("input_unsort.out");
 	for(int i=0; i<t_branches; i++)
 	{
@@ -67,25 +69,27 @@ void input :: roll_no_sort()
 			infile >> sort[i][j];
 		}
 	}
+	infile.close();
+	
+	// Sorting of roll nos
 	for(int i=0; i<t_branches; i++)
 	{
 		for(int j=0; j<roll_size[i]; j++)
 		{	
-			for(int z=j ; z<roll_size[i]; z++)
+			for(int k=j ; k<roll_size[i]; k++)
 			{
-				if(sort[i][j]>sort[i][z])
+				if(sort[i][j]>sort[i][k])
 				{
 					int temp=sort[i][j];
-					sort[i][j]=sort[i][z];
+					sort[i][j]=sort[i][k];
 					sort[i][j]=temp;
 				}
 			}
 		}
 	}
-	infile.close();
 }
 
-void input :: input_out_file()
+void input :: input_out_file()	// To display final o/p in file
 {
 	outfile.open("input.out");//, ios::out, ios::in, ios::app);
 	outfile<<t_rooms<<endl;
