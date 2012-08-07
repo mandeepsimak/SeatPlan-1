@@ -17,13 +17,15 @@ protected:
 	int rows[min_size], cols[min_size], t_rooms;
 
 	// Roll Number variables
-	int t_branches, roll_no[min_size];//, start_roll[min_size], end_roll[min_size];
-	string branch_name[min_size], rollno[min_size];//, input_file;
+	int t_branches, roll_no[min_size], sort[min_size][min_size];
+	int roll_size[min_size];
+	string branch_name[min_size], rollno[min_size];
 	char input_file[15];
 	
 	// File variable
-	ifstream infile;
-	ofstream outfile;
+	ifstream infile;	// Read contents of file
+	ofstream outfile;	// Write into file
+	fstream file;
 	
 public:
 	// Getting Details about room and branch.

@@ -32,29 +32,57 @@ void input ::  input_in_details()	// read input(input.in) file
 
 void input :: expand(string rno)	// process input.in file and 
 {								// generate input_sort.out file
-	//outfile.open("input_unsort.out", ios::app);//, ios::out, ios::in);
-	
 	istringstream rollNo(rno);
 	deque<int> v;
+	int k = 0;
 	bool success = parse_number_list_with_ranges(rollNo, back_inserter(v));
 	if (success)
 	{
+		outfile << v.size()<<endl;
 		copy(v.begin(), v.end()-1, ostream_iterator<int>(outfile, " "));
-		outfile << v.back() << "\n";
+		
+		outfile << v.back()<<endl;
+								
 	}
 	else
 	outfile << "an error occured.\n";
-	//outfile.close();
+	
 }
 
 void input :: roll_no_sort()
 {
-	outfile.open("input_unsort.out");
+	outfile.open("input_unsort.out");//, ios::in, ios::out);
 	for(int i=0; i<t_branches; i++)
 	{
 		expand(rollno[i]);
 	}
 	outfile.close();
+	
+	infile.open("input_unsort.out");
+	for(int i=0; i<t_branches; i++)
+	{
+		infile >> roll_size[i];
+		for(int j=0; j<roll_size[i]; j++)
+		{
+			infile >> sort[i][j];
+		}
+	}
+	for(int i=0; i<t_branches; i++)
+	{
+		for(int j=0; j<roll_size[i]; j++)
+		{	
+			for(int z=j ; z<roll_size[i]; z++)
+			{
+				if(sort[i][j]>sort[i][z])
+				{
+					int temp=sort[i][j];
+					sort[i][j]=sort[i][z];
+					sort[i][j]=temp;
+				}
+			}
+		}
+	}
+	infile.close();
 }
 
 void input :: input_out_file()
@@ -71,6 +99,11 @@ void input :: input_out_file()
 		outfile<<branch_name[i]<<" ";
 		//string ss = itoa (rollno[i]);
 		//expand(rollno[i]);
+		for(int j=0; j<roll_size[i]; j++)
+		{
+			outfile << sort[i][j] << " ";
+		}
+		outfile<<endl;
 	}
 	outfile.close();
 }
