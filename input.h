@@ -4,9 +4,11 @@
 #include <climits>
 #include <deque>
 #include <fstream>
+#include <algorithm>
 using namespace std;
 
 const int min_size = 30;
+const int max_size = 70;
 
 class input
 {
@@ -17,8 +19,8 @@ protected:
 	int rows[min_size], cols[min_size], t_rooms;
 
 	// Roll Number variables
-	int t_branches, roll_no[min_size], sort[min_size][min_size];
-	int roll_size[min_size];
+	int t_branches, roll_no[min_size][min_size];
+	int roll_size[min_size], sortrno[max_size];
 	string branch_name[min_size], rollno[min_size];
 	char input_file[15];
 	
@@ -26,6 +28,8 @@ protected:
 	ifstream infile;	// Read contents of file
 	ofstream outfile;	// Write into file
 	fstream file;
+	
+	int i,j,k;
 	
 public:
 	// Getting Details about room and branch.
@@ -36,5 +40,5 @@ public:
 	void expand(string);
 	template<typename OutIter>
 	bool parse_number_list_with_ranges(istream& is, OutIter out);
-	void roll_no_sort();
+	void roll_no_processing();
 };
