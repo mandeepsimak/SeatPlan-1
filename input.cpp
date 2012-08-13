@@ -2,7 +2,7 @@
 
 void input :: room_details()	// get room details
 {
-	//file.open(in, ios::in, ios::out);
+    //file.open(in, ios::in, ios::out);
 	infile>>t_rooms;
 	for(i=0; i<t_rooms; i++)
 	{
@@ -50,7 +50,7 @@ void input :: expand(string rno)	// process input.in file and
 }
 
 void input :: roll_no_processing()	// Expanding, sorting, removing 
-									// duplicate entries
+								// duplicate entries
 {
 	// Writing expanded form of roll nos in file
 	outfile.open("input_expand.out");
@@ -77,41 +77,42 @@ void input :: roll_no_processing()	// Expanding, sorting, removing
 	{
 		for(j=0; j<roll_size[i]; j++)
 		{
-			sortrno[j] = roll_no[i][j];
+			rno[j] = roll_no[i][j];
 		}
 		
-		sort(sortrno, sortrno+roll_size[i]);	// Sort function
+		sort(rno, rno+roll_size[i]);	// Sort function
 		
 		for(j=0; j<roll_size[i]; j++)
 		{	// Removing duplicate values
-			if(sortrno[j+1]==sortrno[j-1] || sortrno[j+1]==sortrno[j+2])
+			if(rno[j]==rno[j+1])// || rno[j+1]==rno[j+2])
 			{
-				//sortrno[j+1]=0;
-				for(k=j+1; k<=roll_size[i]; k++) 
+				//rno[j+1]=0;
+				for(k=j; k<=roll_size[i]; k++) 
      			{
-          			sortrno[k] = sortrno[k+1];  //shifts each element one position above
+          			rno[k] = rno[k+1];  //shifts each element one position above
      			}
-     			roll_size[i] = roll_size[i]-1;
+     			roll_size[i]--;
+     			j=0;
 			}
 		}
 		
 		// Removing roll nos that are not for exam
 		for(j=0; j<roll_size[i]; j++)
 		{
-			if(sortrno[j]<0)	
+			if(rno[j]<0)	
 			{
 				int a,b;
-				a = sortrno[j];
+				a = rno[j];
 				b = -1 * a;
 			
 				for(k=0; k<roll_size[i]; k++)
 				{
-					if(sortrno[k] == b || sortrno[k] == a)
+					if(rno[k] == b || rno[k] == a)
 					{
-						//sortrno[j+1]=0;
+						//rno[j+1]=0;
 						for (int l=k; l<=roll_size[i]; l++) 
     		 			{
-    		      			sortrno[l] = sortrno[l+1];  //shifts each element one position above
+    		      			rno[l] = rno[l+1];  //shifts each element one position above
     		 			}
     		 			roll_size[i] = roll_size[i]-1;
 					}
@@ -121,7 +122,7 @@ void input :: roll_no_processing()	// Expanding, sorting, removing
 		
 		for(j=0; j<roll_size[i]; j++)
 		{
-			roll_no[i][j] = sortrno[j];
+			roll_no[i][j] = rno[j];
 		}
 	}
 	

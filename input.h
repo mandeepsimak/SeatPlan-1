@@ -20,7 +20,7 @@ protected:
 
 	// Roll Number variables
 	int t_branches, roll_no[min_size][min_size];
-	int roll_size[min_size], sortrno[max_size];
+	int roll_size[min_size], rno[max_size];
 	string branch_name[min_size], rollno[min_size];
 	char input_file[15];
 	
